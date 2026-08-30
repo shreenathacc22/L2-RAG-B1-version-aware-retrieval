@@ -36,9 +36,18 @@ from observe import RUN_ID, TRACE_FILE, event, histogram, kv, say, spread, stage
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "labs"))          # reuse the class kit's LLM client
-CORPUS = ROOT / "corpus" / "aventro"
+import os as _os  # noqa: E402 — B1 needs env overrides at import time
+
+# B1: point the whole pipeline at a different corpus/collection without editing
+# code, so baseline and version-aware runs cannot drift apart by accident.
+#   RAG_CORPUS=simple_rag/corpus/kafka_ops  RAG_COLLECTION=kafka_ops
+CORPUS = ROOT / (_os.environ.get("RAG_CORPUS") or "corpus/aventro")
+
+# The metadata B1 adds. Named once so the reader, the chunker and the store
+# cannot disagree about which fields travel.
+B1_FIELDS = ("doc_title", "topic_id", "version", "effective_date", "superseded")
 CHROMA_DIR = Path(__file__).resolve().parent / ".chroma"
-COLLECTION = "aventro"
+COLLECTION = _os.environ.get("RAG_COLLECTION") or "aventro"
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"   # 384-dim, ~90MB, Apache-2.0
 
 
@@ -48,7 +57,46 @@ EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"   # 384-dim, ~90MB, Apach
 # raises. So we measure every file and let the numbers say which format to trust.
 
 def read_md(path: Path) -> tuple[str, dict]:
-    return path.read_text(encoding="utf-8", errors="replace"), {}
+    raw = path.read_text(encoding="utf-8", errors="replace")
+    # B1: an optional YAML-ish front-matter block carries version metadata. Parsed
+    # here rather than in a separate pass because load() already merges whatever a
+    # reader returns onto the doc — so version travels for free from this point on.
+    # Corpora without front-matter (Aventro) are unaffected: no block, empty dict.
+    return _split_front_matter(raw)
+
+
+_FM_BOOL = {"true": True, "false": False}
+
+
+def _split_front_matter(raw: str) -> tuple[str, dict]:
+    """Return (body, metadata). Only flat `key: value` lines are supported —
+    B1 is about retrieval control, not a YAML parser."""
+    if not raw.startswith("---"):
+        return raw, {}
+    end = raw.find("\n---", 3)
+    if end == -1:
+        return raw, {}
+    block, body = raw[3:end], raw[end + 4:].lstrip("\n")
+    meta: dict = {}
+    for line in block.splitlines():
+        if ":" not in line:
+            continue
+        k, v = line.split(":", 1)
+        k, v = k.strip(), v.strip()
+        if not k:
+            continue
+        if v.lower() in _FM_BOOL:
+            meta[k] = _FM_BOOL[v.lower()]
+        elif v.isdigit():
+            meta[k] = int(v)
+        else:
+            meta[k] = v
+    # `doc` in front-matter is the human title shared by every version of a topic.
+    # It must NOT become `stem`: stem is the dedupe key, and two versions sharing
+    # a stem would silently drop one — which would delete the experiment.
+    if "doc" in meta:
+        meta["doc_title"] = meta.pop("doc")
+    return body, meta
 
 
 def read_pdf(path: Path) -> tuple[str, dict]:
@@ -221,7 +269,11 @@ def chunk_all(docs: list[dict], target_words: int, overlap: int,
             pieces = chunk(d["text"], d["stem"], target_words, overlap, min_words)
             for i, p in enumerate(pieces):
                 chunks.append({"id": f"{d['fmt']}:{d['stem']}#{i}", "doc": d["stem"],
-                               "fmt": d["fmt"], "path": d["path"], "seq": i, **p})
+                               "fmt": d["fmt"], "path": d["path"], "seq": i,
+                               # B1: version metadata rides from the doc onto every
+                               # chunk, because the filter runs at chunk level.
+                               **{k: d[k] for k in B1_FIELDS if k in d},
+                               **p})
             event("chunk", doc=d["stem"], fmt=d["fmt"], chunks=len(pieces),
                   doc_words=d["words"],
                   words=[p["words"] for p in pieces],
@@ -347,7 +399,11 @@ def store(chunks: list[dict], vecs: list[list[float]], reset: bool) -> None:
                     documents=[c["text"] for c in part],
                     metadatas=[{"doc": c["doc"], "fmt": c["fmt"], "path": c["path"],
                                 "heading": c["heading"], "seq": c["seq"],
-                                "words": c["words"]} for c in part])
+                                "words": c["words"],
+                                # B1 additions — present only when the corpus
+                                # carries front-matter, so Aventro is unchanged.
+                                **{k: c[k] for k in B1_FIELDS if k in c}}
+                               for c in part])
             event("store_batch", n=len(part),
                   ms=round((time.perf_counter() - t0) * 1000))
         obs["count"] = col.count()
@@ -372,15 +428,20 @@ SYSTEM = (
 )
 
 
-def retrieve(query: str, k: int = 4) -> list[dict]:
+def retrieve(query: str, k: int = 4, version_aware: bool = False) -> list[dict]:
+    """B1: `version_aware=True` adds ONE metadata condition — superseded chunks
+    are excluded before similarity ranking, not re-ranked afterwards and not
+    argued away in the prompt. Everything else (embedding model, query text, k)
+    is held identical so the OFF/ON comparison is a real ablation."""
     embedder()   # warm before the clock starts, same reason as embed_all()
-    with stage("retrieve", query=query, k=k) as obs:
+    with stage("retrieve", query=query, k=k, version_aware=version_aware) as obs:
         t0 = time.perf_counter()
         qv = embed([query], label="query")[0]
         embed_ms = round((time.perf_counter() - t0) * 1000)
 
         t1 = time.perf_counter()
-        res = collection().query(query_embeddings=[qv], n_results=k,
+        where = {"superseded": False} if version_aware else None
+        res = collection().query(query_embeddings=[qv], n_results=k, where=where,
                                  include=["documents", "metadatas", "distances"])
         search_ms = round((time.perf_counter() - t1) * 1000)
 

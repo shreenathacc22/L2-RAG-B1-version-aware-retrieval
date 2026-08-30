@@ -1,0 +1,609 @@
+{
+  "version_aware": true,
+  "cases": 16,
+  "total_chunks_retrieved": 64,
+  "superseded_chunks_retrieved": 0,
+  "superseded_rate_pct": 0.0,
+  "version_case_retrieval": "8/8",
+  "version_case_pct": 100.0,
+  "exact_string_retrieval": "6/6",
+  "exact_string_facts_in_context": "6/6",
+  "exact_string_pct": 100.0,
+  "multi_hop_retrieval": "2/2",
+  "median_latency_ms": 37.2,
+  "mean_latency_ms": 38.0,
+  "rows": [
+    {
+      "id": "b1-001",
+      "type": "version_current",
+      "question": "At what consumer lag should operations raise an alert?",
+      "hits": [
+        {
+          "doc": "Kafka Consumer Lag Runbook",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.522
+        },
+        {
+          "doc": "Kafka Disk Utilisation Alerting",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.303
+        },
+        {
+          "doc": "Kafka Retention Policy",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.234
+        },
+        {
+          "doc": "Kafka Incident Escalation Path",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.233
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 40.8
+    },
+    {
+      "id": "b1-002",
+      "type": "version_current",
+      "question": "How long do standard topics retain messages by default?",
+      "hits": [
+        {
+          "doc": "Kafka Retention Policy",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.408
+        },
+        {
+          "doc": "Kafka Topic Naming Standard",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.294
+        },
+        {
+          "doc": "Kafka Consumer Lag Runbook",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.214
+        },
+        {
+          "doc": "Kafka Disk Utilisation Alerting",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.202
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 36.1
+    },
+    {
+      "id": "b1-003",
+      "type": "version_current",
+      "question": "In what order should a broker be drained and stopped during a patch?",
+      "hits": [
+        {
+          "doc": "Kafka Broker Restart Procedure",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.429
+        },
+        {
+          "doc": "Kafka Retention Policy",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.336
+        },
+        {
+          "doc": "Kafka Incident Escalation Path",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.32
+        },
+        {
+          "doc": "Kafka Replication Settings",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.301
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": false,
+      "retrieval_pass": true,
+      "ms": 34.7
+    },
+    {
+      "id": "b1-004",
+      "type": "version_current",
+      "question": "Which host issues broker TLS certificates?",
+      "hits": [
+        {
+          "doc": "Kafka TLS Certificate Rotation",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.625
+        },
+        {
+          "doc": "Kafka Broker Restart Procedure",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.396
+        },
+        {
+          "doc": "Kafka Replication Settings",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.389
+        },
+        {
+          "doc": "Kafka Topic Naming Standard",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.379
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 29.0
+    },
+    {
+      "id": "b1-005",
+      "type": "version_current",
+      "question": "Which team owns escalation for a SEV-1 Kafka incident?",
+      "hits": [
+        {
+          "doc": "Kafka Incident Escalation Path",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.675
+        },
+        {
+          "doc": "Kafka Broker Restart Procedure",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.468
+        },
+        {
+          "doc": "Kafka Consumer Lag Runbook",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.462
+        },
+        {
+          "doc": "Kafka Topic Naming Standard",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.46
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 36.4
+    },
+    {
+      "id": "b1-006",
+      "type": "version_current",
+      "question": "What prefix should a new event topic use?",
+      "hits": [
+        {
+          "doc": "Kafka Topic Naming Standard",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.435
+        },
+        {
+          "doc": "Kafka Incident Escalation Path",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.136
+        },
+        {
+          "doc": "Kafka Replication Settings",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.088
+        },
+        {
+          "doc": "Kafka Disk Utilisation Alerting",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.07
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 36.2
+    },
+    {
+      "id": "b1-007",
+      "type": "version_current",
+      "question": "At what disk utilisation should a broker page?",
+      "hits": [
+        {
+          "doc": "Kafka Disk Utilisation Alerting",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.444
+        },
+        {
+          "doc": "Kafka Retention Policy",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.336
+        },
+        {
+          "doc": "Kafka Replication Settings",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.305
+        },
+        {
+          "doc": "Kafka Broker Restart Procedure",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.28
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 37.7
+    },
+    {
+      "id": "b1-008",
+      "type": "version_current",
+      "question": "What replication factor should a new production topic use?",
+      "hits": [
+        {
+          "doc": "Kafka Replication Settings",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.371
+        },
+        {
+          "doc": "Kafka Topic Naming Standard",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.227
+        },
+        {
+          "doc": "Kafka Consumer Lag Runbook",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.169
+        },
+        {
+          "doc": "Kafka Disk Utilisation Alerting",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.131
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 34.7
+    },
+    {
+      "id": "b1-009",
+      "type": "exact_string",
+      "question": "What port does BROKER-EAST-02 use for TLS traffic?",
+      "hits": [
+        {
+          "doc": "Kafka TLS Certificate Rotation",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.561
+        },
+        {
+          "doc": "Kafka Broker Restart Procedure",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.484
+        },
+        {
+          "doc": "Kafka Incident Escalation Path",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.466
+        },
+        {
+          "doc": "Kafka Replication Settings",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.428
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 36.3
+    },
+    {
+      "id": "b1-010",
+      "type": "exact_string",
+      "question": "What is the cluster ID of the production Kafka cluster?",
+      "hits": [
+        {
+          "doc": "Kafka Disk Utilisation Alerting",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.608
+        },
+        {
+          "doc": "Kafka Topic Naming Standard",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.604
+        },
+        {
+          "doc": "Kafka Replication Settings",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.589
+        },
+        {
+          "doc": "Kafka Broker Restart Procedure",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.555
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 36.7
+    },
+    {
+      "id": "b1-011",
+      "type": "exact_string",
+      "question": "Which PagerDuty service covers the Kafka on-call rota?",
+      "hits": [
+        {
+          "doc": "Kafka Incident Escalation Path",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.604
+        },
+        {
+          "doc": "Kafka Topic Naming Standard",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.594
+        },
+        {
+          "doc": "Kafka Retention Policy",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.579
+        },
+        {
+          "doc": "Kafka Disk Utilisation Alerting",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.569
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 38.4
+    },
+    {
+      "id": "b1-012",
+      "type": "exact_string",
+      "question": "What is the metrics endpoint for BROKER-EAST-02?",
+      "hits": [
+        {
+          "doc": "Kafka Disk Utilisation Alerting",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.402
+        },
+        {
+          "doc": "Kafka Broker Restart Procedure",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.396
+        },
+        {
+          "doc": "Kafka Topic Naming Standard",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.391
+        },
+        {
+          "doc": "Kafka Replication Settings",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.379
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 39.8
+    },
+    {
+      "id": "b1-013",
+      "type": "exact_string",
+      "question": "What is the name of the production Kafka cluster?",
+      "hits": [
+        {
+          "doc": "Kafka Replication Settings",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.597
+        },
+        {
+          "doc": "Kafka Topic Naming Standard",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.595
+        },
+        {
+          "doc": "Kafka Disk Utilisation Alerting",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.57
+        },
+        {
+          "doc": "Kafka Broker Restart Procedure",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.546
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 43.0
+    },
+    {
+      "id": "b1-014",
+      "type": "exact_string",
+      "question": "What port does BROKER-EAST-02 use for PLAINTEXT traffic?",
+      "hits": [
+        {
+          "doc": "Kafka Broker Restart Procedure",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.428
+        },
+        {
+          "doc": "Kafka Incident Escalation Path",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.411
+        },
+        {
+          "doc": "Kafka Replication Settings",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.409
+        },
+        {
+          "doc": "Kafka Topic Naming Standard",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.402
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 49.4
+    },
+    {
+      "id": "b1-015",
+      "type": "multi_hop",
+      "question": "A broker is paging on disk utilisation. At what percentage does it page, and how long are standard topics retained if I need to reduce retention to recover space?",
+      "hits": [
+        {
+          "doc": "Kafka Retention Policy",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.495
+        },
+        {
+          "doc": "Kafka Disk Utilisation Alerting",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.437
+        },
+        {
+          "doc": "Kafka Replication Settings",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.255
+        },
+        {
+          "doc": "Kafka Broker Restart Procedure",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.251
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 37.8
+    },
+    {
+      "id": "b1-016",
+      "type": "multi_hop",
+      "question": "I am escalating a SEV-1 on BROKER-EAST-02. Which team do I page, and what port do I check for TLS health?",
+      "hits": [
+        {
+          "doc": "Kafka Incident Escalation Path",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.53
+        },
+        {
+          "doc": "Kafka TLS Certificate Rotation",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.53
+        },
+        {
+          "doc": "Kafka Broker Restart Procedure",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.48
+        },
+        {
+          "doc": "Kafka Topic Naming Standard",
+          "v": 2,
+          "superseded": false,
+          "sim": 0.4
+        }
+      ],
+      "superseded_retrieved": 0,
+      "must_cite_ok": true,
+      "must_not_cite_ok": true,
+      "facts_in_context": true,
+      "retrieval_pass": true,
+      "ms": 41.1
+    }
+  ]
+}
